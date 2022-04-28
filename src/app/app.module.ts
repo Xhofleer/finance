@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { MortgagePayoffCalculatorComponent } from './mortgage-payoff-calculator/mortgage-payoff-calculator.component';
 import { TestComponent } from './test/test.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

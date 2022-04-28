@@ -4,7 +4,7 @@
 
 <div class="row">
   <div class="col-5">
-    <form>
+    <form novalidate [formGroup]="form" (ngSubmit)="onSubmit()">
       <table class="table table-borderless">
         <tr>
           <td>
@@ -13,7 +13,7 @@
           <td>
             <div class="input-group">
               <span class="input-group-text">€</span>
-              <input type="text" class="form-control" id="originalTotalLoan">
+              <input type="number" class="form-control" id="originalTotalLoan" formControlName="originalTotalLoan">
             </div>
           </td>
         </tr>
@@ -23,7 +23,7 @@
           </td>
           <td>
             <div class="input-group">
-              <input type="text" class="form-control" id="originalLoanTerm">
+              <input type="number" class="form-control" id="originalLoanTerm" formControlName="originalLoanTerm">
               <span class="input-group-text">Years</span>
             </div>
           </td>
@@ -34,7 +34,7 @@
           </td>
           <td>
             <div class="input-group">
-              <input type="text" class="form-control" id="interest">
+              <input type="number" class="form-control" id="interest" formControlName="interest">
               <span class="input-group-text">%</span>
             </div>
           </td>
@@ -45,24 +45,41 @@
           </td>
           <td>
             <div class="input-group">
-              <input type="text" class="form-control" id="remainingYears">
+              <input type="number" class="form-control" id="remainingYears" formControlName="remainingYears">
               <span class="input-group-text">Jaren</span>
             </div>
             <div class="input-group">
-              <input type="text" class="form-control" id="remainingMonths">
+              <input type="number" class="form-control" id="remainingMonths" formControlName="remainingMonths">
               <span class="input-group-text">Maanden</span>
             </div>
           </td>
         </tr>
       </table>
       <div class="d-flex justify-content-end pe-2">
-        <button type="submit" class="btn btn-primary">Bereken</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Bereken</button>
       </div>
     </form>
 
   </div>
   <div class="col">
-    Column
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">Maand</th>
+        <th scope="col">Aflossing</th>
+        <th scope="col">Rente</th>
+        <th scope="col">Openstaande lening</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let payment of paymentsPerYear; index as i">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{payment.paymentAmount | number : '1.0-0'}}</td>
+        <td>{{payment.interestAmount | number : '1.0-0'}}</td>
+        <td>{{payment.remainingLoan | number : '1.0-0'}}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
